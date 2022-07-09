@@ -5,7 +5,7 @@ set -euo pipefail
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for wsl-nerdctl.
 GH_REPO="https://github.com/containerd/nerdctl"
 TOOL_NAME="wsl-nerdctl"
-TOOL_TEST="nerdctl -h"
+TOOL_TEST="nerdctl --version"
 
 fail() {
   echo -e "asdf-$TOOL_NAME: $*"
@@ -79,6 +79,9 @@ install_version() {
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
     test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
+
+    sudo chown root "$install_path/$tool_cmd" || fail "Could not change $tool_cmd owner to root."
+    sudo chmod +s "$install_path/$tool_cmd" || fail "Could not set uid bit on $tool_cmd."
 
     echo "$TOOL_NAME $version installation was successful!"
   ) || (
