@@ -83,6 +83,8 @@ install_version() {
     sudo chown root "$install_path/$tool_cmd" || fail "Could not change $tool_cmd owner to root."
     sudo chmod +s "$install_path/$tool_cmd" || fail "Could not set uid bit on $tool_cmd."
 
+    ln -sf "$install_path/$tool_cmd" "$install_path/docker" || fail "Could not create docker symlink."
+
     echo "$TOOL_NAME $version installation was successful!"
   ) || (
     rm -rf "$install_path"
