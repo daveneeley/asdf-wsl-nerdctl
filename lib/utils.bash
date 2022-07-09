@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for wsl-nerdctl.
-GH_REPO="https://github.com/daveneeley/asdf-wsl-nerdctl"
+GH_REPO="https://github.com/containerd/nerdctl"
 TOOL_NAME="wsl-nerdctl"
 TOOL_TEST="nerdctl -h"
 
@@ -14,7 +14,6 @@ fail() {
 
 curl_opts=(-fsSL)
 
-# NOTE: You might want to remove this if wsl-nerdctl is not hosted on GitHub releases.
 if [ -n "${GITHUB_API_TOKEN:-}" ]; then
   curl_opts=("${curl_opts[@]}" -H "Authorization: token $GITHUB_API_TOKEN")
 fi
@@ -31,18 +30,33 @@ list_github_tags() {
 }
 
 list_all_versions() {
-  # TODO: Adapt this. By default we simply list the tag names from GitHub releases.
-  # Change this function if wsl-nerdctl has other means of determining installable versions.
   list_github_tags
+}
+
+get_os_artifact_name() {
+  case "$OSTYPE" in
+  darwin*) echo "linux" ;;
+  linux*) echo "linux" ;;
+  *) echo "$OSTYPE" ;;
+  esac
+}
+
+get_system_arch() {
+  archie=$(uname -m)
+  archie=${archie/x86_64/amd64}
+  archie=${archie/aarch64/arm64}
+  archie=${archie/armv71/arm-v7}
+  echo $archie
 }
 
 download_release() {
   local version filename url
   version="$1"
   filename="$2"
+  platform=$(get_os_artifact_name)
+  arch=$(get_system_arch)
 
-  # TODO: Adapt the release URL convention for wsl-nerdctl
-  url="$GH_REPO/archive/v${version}.tar.gz"
+  url="$GH_REPO/releases/downloads/v${version}/nerdctl-full-${version}-${platform}-${arch}.tar.gz"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
