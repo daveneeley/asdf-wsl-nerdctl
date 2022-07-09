@@ -1,4 +1,3 @@
-#!/bin/bash
 # steps from https://guide2wsl.com/nerdctl/
 containerDPath=$(asdf which containerd)
 binDir=$(dirname $containerDPath)
