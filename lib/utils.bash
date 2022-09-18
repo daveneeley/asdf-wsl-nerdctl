@@ -57,7 +57,7 @@ download_release() {
   arch=$(get_system_arch)
   isItFull="full-"
 
-  if [ "$arch" != "amd64" && "$arch" != "arm64" ]; then
+  if [ "$arch" != "amd64" ] && [ "$arch" != "arm64" ]; then
     echo "asdf-$TOOL_NAME has unmet dependencies for $arch. Cannot do a full install. See https://github.com/containerd/nerdctl#install for extra steps."
     isItFull=""
   fi
