@@ -46,6 +46,7 @@ get_system_arch() {
   archie=${archie/x86_64/amd64}
   archie=${archie/aarch64/arm64}
   archie=${archie/armv71/arm-v7}
+  archie=${archie/armv7l/arm-v7}
   echo $archie
 }
 
