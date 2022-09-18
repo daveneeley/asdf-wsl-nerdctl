@@ -55,8 +55,14 @@ download_release() {
   filename="$2"
   platform=$(get_os_artifact_name)
   arch=$(get_system_arch)
+  isItFull="full-"
 
-  url="$GH_REPO/releases/download/v${version}/nerdctl-full-${version}-${platform}-${arch}.tar.gz"
+  if [ "$arch" != "amd64" && "$arch" != "arm64" ]; then
+    echo "asdf-$TOOL_NAME has unmet dependencies for $arch. Cannot do a full install. See https://github.com/containerd/nerdctl#install for extra steps."
+    isItFull=""
+  fi
+
+  url="$GH_REPO/releases/download/v${version}/nerdctl-${isItFull}${version}-${platform}-${arch}.tar.gz"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
@@ -75,7 +81,6 @@ install_version() {
     mkdir -p "$install_path"
     cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
-    # TODO: Assert wsl-nerdctl executable exists.
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
     test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
