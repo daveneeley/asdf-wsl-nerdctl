@@ -9,8 +9,11 @@
 
 # Contents
 
+- [asdf-wsl-nerdctl  ](#asdf-wsl-nerdctl--)
+- [Contents](#contents)
 - [Dependencies](#dependencies)
 - [Install](#install)
+- [Additional Commands](#additional-commands)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -47,6 +50,26 @@ nerdctl -h
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
 install & manage versions.
+
+# Additional Commands
+
+```shell
+# Get help on containerd
+asdf wsl-nerdctl containerd
+
+# Install containerd with systemd
+asdf wsl-nerdctl containerd systemd
+
+# Install containerd for openrc
+asdf wsl-nerdctl containerd openrc
+
+# Start containerd in foreground
+asdf wsl-nerdctl containerd start
+
+# Stop or cleanup containerd started in foreground
+asdf wsl-nerdctl contaienrd stop
+
+```
 
 # Contributing
 
