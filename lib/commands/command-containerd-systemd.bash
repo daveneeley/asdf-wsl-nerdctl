@@ -16,5 +16,11 @@ echo << 'HELP'
 
 You may now use containerd with systemctl.
 
-systemctl containerd start
-systemctl containerd stop
+systemctl --user containerd start
+systemctl --user containerd stop
+
+You may also use buildkitd with systemctl.
+
+systemctl --user buildkitd start
+systemctl --user buildkitd stop
+HELP
