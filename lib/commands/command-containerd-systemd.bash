@@ -5,6 +5,7 @@ buildkitDPath=$(asdf which buildkitd)
 binDir=$(dirname $containerDPath)
 
 exec $binDir/containerd-rootless-setuptool.sh install
+exec $binDir/containerd-rootless-setuptool.sh install-buildkit
 
 nerdctlPath=$(asdf which nerdctl)
 test -x $nerdctlPath || fail "nerdctl not executable at $nerdctlPath."
