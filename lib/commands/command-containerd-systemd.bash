@@ -10,7 +10,7 @@ $binDir/containerd-rootless-setuptool.sh install-buildkit
 nerdctlPath=$(asdf which nerdctl)
 test -x $nerdctlPath || fail "nerdctl not executable at $nerdctlPath."
 
-echo << 'HELP'
+cat << 'HELP'
 
 You may now use containerd with systemctl.
 

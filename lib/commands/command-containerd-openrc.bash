@@ -8,7 +8,7 @@ scriptFile=$(realpath -e ${commandFolder}/../../scripts/wsl-init.sh)
 sudo mkdir -p /etc/profile.d
 sudo ln -sf ${scriptFile} /etc/profile.d/wsl-init.sh 
  
-echo << 'HELP'
+cat << 'HELP'
 
 # This content provided by https://wsl.dev/wsl2init/
 
