@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo << 'HELP'
+cat << 'HELP'
 
 ------------------- simple ----------------------
 A cheap method for running containerd and buildkitd without systemd.
