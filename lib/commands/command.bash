@@ -2,6 +2,12 @@
 
 cat << 'HELP'
 
+# WSL + nerdctl helpful information:
+# https://guide2wsl.com/nerdctl
+
+# WSL information generally:
+# https://wsl.dev
+
 ------------------- simple ----------------------
 A cheap method for running containerd and buildkitd without systemd.
 The process starts in foreground in the current terminal session.
@@ -18,7 +24,7 @@ WSL2 supports systemd. If available, you may consider running containerd
 under systemd instead. In that case you can use the systemd command to
 configure the systemd unit.
 
-To configure systemd, set the systemd flag set in your WSL distro settings.
+To configure systemd, set the systemd flag in your WSL distro settings.
 You will need to edit the wsl.conf file to ensure systemd starts up on boot.
 
 Add these lines to `/etc/wsl.conf` (note you will need to run your editor 
@@ -50,7 +56,7 @@ command = "/usr/bin/env -i /usr/bin/unshare --pid --mount-proc --fork --propagat
 
 Once you have configured systemd and rebooted WSL, run the containerd openrc command.
 
-Setup systemd: wsl-nerdctl containerd systemd
+Setup openrc: wsl-nerdctl containerd openrc
 
 
 ------------------- notes ------------------------
@@ -63,5 +69,6 @@ wsl.exe -d <your distro>
 
 # Check the running processes
 ps -ef
+
 
 HELP
