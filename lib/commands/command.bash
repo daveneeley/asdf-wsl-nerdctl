@@ -23,9 +23,9 @@ Start: wsl-nerdctl containerd start
 Stop (or cleanup): wsl-nerdctl containerd stop
 
 ------------------- systemd ---------------------
-WSL2 supports systemd. If available, you may consider running containerd
-under systemd instead. In that case you can use the systemd command to
-configure the systemd unit.
+WSL2 supports systemd in later versions. If available, you may consider
+running containerd under systemd instead. In that case you can use the
+systemd command to configure the systemd unit.
 
 To configure systemd, set the systemd flag in your WSL distro settings.
 You will need to edit the wsl.conf file to ensure systemd starts up on boot.
@@ -36,6 +36,13 @@ with sudo privileges, e.g: sudo nano /etc/wsl.conf):
 ```
 [boot]
 systemd=true
+```
+
+or from the CLI:
+
+```
+sudo bash -c 'echo "[boot]" > /etc/wsl.conf'
+sudo bash -c 'echo "systemd=true" >> /etc/wsl.conf'
 ```
 
 Once you have configured systemd and rebooted WSL, run the containerd systemd command.
@@ -72,6 +79,35 @@ wsl.exe -d <your distro>
 
 # Check the running processes
 ps -ef
+
+# pull a container
+nerdctl pull hello-world
+
+Should you have issues with networking when pulling the container,
+it's probably WSL's fault. It generates an `/etc/resolv.conf` file
+with a DNS nameserver that is internal to the VM. There are some guides
+available for help, the base of any solution is to turn off this generated
+file via a setting in `wsl.conf` and supply your own.
+
+This gist provides a good explanation:
+
+https://gist.github.com/machuu/7663aa653828d81efbc2aaad6e3b1431
+
+One of the comments gives a quick setup example. Note that `8.8.8.8`
+is one of Google's DNS servers. You may want DNS from your VPN to be
+contacted first.
+
+Most importantly, shutdown and restart your WSL installs after doing this.
+
+```
+sudo rm /etc/resolv.conf
+# add more nameserver lines before this if desired
+sudo bash -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+sudo chattr +i /etc/resolv.conf
+
+sudo bash -c 'echo "[network]" > /etc/wsl.conf'
+sudo bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
+```
 
 
 HELP
