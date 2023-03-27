@@ -8,6 +8,9 @@ cat << 'HELP'
 # WSL information generally:
 # https://wsl.dev
 
+# nerdctl + buildkit
+# https://pet2cattle.com/2022/02/nerdctl-rootless-buildkit
+
 ------------------- simple ----------------------
 A cheap method for running containerd and buildkitd without systemd.
 The process starts in foreground in the current terminal session.

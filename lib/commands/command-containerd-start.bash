@@ -3,7 +3,7 @@
 binDir="${ASDF_INSTALL_PATH}/bin"
 export CNI_PATH=$binDir/cni
 
-$containerdStatus=$(systemctl --user is-enabled containerd)
+containerdStatus=$(systemctl --user is-enabled containerd)
 if [[ "enabled" == "$containerdStatus" ]]; then
     systemctl --user start containerd
 else
@@ -11,7 +11,7 @@ else
     $containerdPath &
 fi
 
-$buildkitStatus=$(systemctl --user is-enabled buildkit)
+buildkitStatus=$(systemctl --user is-enabled buildkit)
 if [[ "enabled" == "$buildkitStatus" ]]; then
     systemctl --user start buildkit
 else

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$containerdStatus=$(systemctl --user is-active containerd)
+containerdStatus=$(systemctl --user is-active containerd)
 if [[ "active" == "$containerdStatus" ]]; then
     systemctl --user stop containerd
 else
@@ -8,7 +8,7 @@ else
     pkill $containerDPath
 fi
 
-$buildkitStatus=$(systemctl --user is-active buildkit)
+buildkitStatus=$(systemctl --user is-active buildkit)
 if [[ "active" == "$buildkitStatus" ]]; then
     systemctl --user stop buildkit
 else
