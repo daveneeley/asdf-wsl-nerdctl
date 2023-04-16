@@ -1,5 +1,3 @@
-#!/bin/bash
-binDir=$(dirname $(asdf which nerdctl))
+binDir="${ASDF_INSTALL_PATH}"/bin
 # file is marked executable so that it is executed directly instead of asdf sourcing it
 export CNI_PATH=$binDir/cni
-echo $CNI_PATH
