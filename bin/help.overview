@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo << 'HELP'
+
+Run nerdctl, buildkit and related components in WSL.
+
+HELP

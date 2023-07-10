@@ -67,7 +67,7 @@ asdf wsl-nerdctl containerd openrc
 asdf wsl-nerdctl containerd start
 
 # Stop or cleanup containerd started in foreground
-asdf wsl-nerdctl contaienrd stop
+asdf wsl-nerdctl containerd stop
 
 ```
 
