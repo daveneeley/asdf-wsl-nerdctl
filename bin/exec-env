@@ -1,1 +1,3 @@
+#!/usr/bin/env bash
+
 CNI_BIN_DIR=${ASDF_INSTALL_PATH}/bin/cni
